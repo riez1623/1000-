@@ -48,7 +48,6 @@
             color: green;
             font-size: 18px;
             overflow: hidden;
-            white-space: nowrap;
             z-index: 50;
             display: none;
         }
@@ -69,16 +68,17 @@
             }
         }
 
-        /* Adjust text size */
-        .claim-btn {
-            font-size: 24px;
+        /* Hide all the elements after claim is clicked */
+        .hidden {
+            display: none;
         }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Claim your 1000 dollars now!</h1>
+        <h1 id="claimText">Claim your 1000 dollars now!</h1>
         <button class="claim-btn" id="claimBtn">Claim</button>
     </div>
 
@@ -87,11 +87,13 @@
     <script>
         // Get elements
         const claimBtn = document.getElementById('claimBtn');
+        const claimText = document.getElementById('claimText');
         const matrix = document.getElementById('matrix');
 
         // Random characters for the matrix effect
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+[]{}|;:,.<>?';
-        
+
+        // Function to generate matrix effect
         function generateMatrix() {
             for (let i = 0; i < 100; i++) {
                 const charSpan = document.createElement('span');
@@ -99,21 +101,21 @@
                 charSpan.innerText = randomChar;
                 matrix.appendChild(charSpan);
 
-                // Randomly position the spans
+                // Randomly position the spans horizontally
                 const randomLeft = Math.random() * 100;
-                const randomDelay = Math.random() * 5;
+                const randomDelay = Math.random() * 3;
 
                 charSpan.style.left = randomLeft + '%';
-                charSpan.style.animationDuration = 2 + Math.random() * 3 + 's'; // Speed of movement
-                charSpan.style.animationDelay = randomDelay + 's'; // Delay before movement
+                charSpan.style.animationDuration = 4 + Math.random() * 5 + 's'; // Slow speed for better effect
+                charSpan.style.animationDelay = randomDelay + 's'; // Delay before moving
             }
         }
 
         // Function to start the hacking effect
         function startHacking() {
-            // Hide the initial claim message and button
-            document.querySelector('h1').style.display = 'none';
-            claimBtn.style.display = 'none';
+            // Hide the initial message and claim button
+            claimText.classList.add('hidden');
+            claimBtn.classList.add('hidden');
 
             // Change background to black and text color to green
             document.body.style.backgroundColor = 'black';
@@ -122,7 +124,7 @@
             // Show the matrix effect
             matrix.style.display = 'block';
 
-            // Start the matrix effect
+            // Start generating the matrix effect
             generateMatrix();
         }
 
