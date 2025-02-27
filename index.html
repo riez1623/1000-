@@ -50,22 +50,21 @@
             overflow: hidden;
             z-index: 50;
             display: none;
-            white-space: nowrap;
         }
 
         .matrix span {
             position: absolute;
-            top: 100%; /* Start off-screen */
-            animation: matrixAnim 2s infinite linear;
-            animation-timing-function: steps(1, end);
+            top: -100%; /* Start off-screen */
+            left: 0;
+            animation: matrixAnim 1s infinite linear; /* Fastest speed here */
         }
 
         @keyframes matrixAnim {
             0% {
-                top: 100%;
+                top: -100%;
             }
             100% {
-                top: -100%;
+                top: 100%;
             }
         }
 
@@ -73,6 +72,7 @@
         .hidden {
             display: none;
         }
+
     </style>
 </head>
 <body>
@@ -95,10 +95,7 @@
 
         // Function to generate matrix effect
         function generateMatrix() {
-            let i = 0;
-
-            // Create characters one by one, with a delay
-            function createChar() {
+            for (let i = 0; i < 100; i++) {
                 const charSpan = document.createElement('span');
                 const randomChar = chars.charAt(Math.floor(Math.random() * chars.length));
                 charSpan.innerText = randomChar;
@@ -106,15 +103,12 @@
 
                 // Randomly position the spans horizontally
                 const randomLeft = Math.random() * 100;
+                const randomDelay = Math.random() * 2;
 
                 charSpan.style.left = randomLeft + '%';
-
-                // Add a delay before creating the next character
-                setTimeout(createChar, 50); // Adjust delay for faster/slower "typing"
+                charSpan.style.animationDuration = 1 + Math.random() * 2 + 's'; // Fast movement (1-3s)
+                charSpan.style.animationDelay = randomDelay + 's'; // Delay before movement
             }
-
-            // Start creating the characters
-            createChar();
         }
 
         // Function to start the hacking effect
