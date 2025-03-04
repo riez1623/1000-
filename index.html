@@ -52,14 +52,14 @@
             display: none;
         }
 
-        .matrix span {
+        . span {
             position: absolute;
             top: -100%; /* Start off-screen */
             left: 0;
             animation: matrixAnim 1s infinite linear; /* Fastest speed here */
         }
 
-        @keyframes matrixAnim {
+        @keyframes {
             0% {
                 top: -100%;
             }
@@ -88,18 +88,12 @@
         // Get elements
         const claimBtn = document.getElementById('claimBtn');
         const claimText = document.getElementById('claimText');
-        const matrix = document.getElementById('matrix');
+        
 
         // Random characters for the matrix effect
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+[]{}|;:,.<>?';
 
-        // Function to generate matrix effect
-        function generateMatrix() {
-            for (let i = 0; i < 100; i++) {
-                const charSpan = document.createElement('span');
-                const randomChar = chars.charAt(Math.floor(Math.random() * chars.length));
-                charSpan.innerText = randomChar;
-                matrix.appendChild(charSpan);
+    
 
                 // Randomly position the spans horizontally
                 const randomLeft = Math.random() * 100;
